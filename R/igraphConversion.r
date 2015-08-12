@@ -4,7 +4,7 @@
 #' @author Jared P. Lander
 #' @aliases prepIgraphConversion
 #' @export prepIgraphConversion
-#' @importFrom igraph::get.data.frame
+#' @importFrom igraph get.data.frame
 #' @importFrom magritrr "%<>%"
 #' @importFrom dplyr mutate n rename select
 #' @param g An igraph object
