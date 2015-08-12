@@ -1,15 +1,13 @@
-Package: sigma
+Package: GraphConvert
 Type: Package
-Title: Interface to sigma.js Graph Visualization Library
+Title: Utilities for converting graphs amongst different types
 Version: 1.0
-Date: 2014-12-05
-Author: Alexis Jacomy and JJ Allaire
-Maintainer: JJ Allaire <jj@rstudio.com>
-Description: Interface to sigma.js Network Visualization Library
+Date: 2015-08-12
+Author: Jared P. Lander
+Maintainer: Jared P. Lander <packages@jaredlander.com>
+Description: Utilities for converting graphs amongst different types
 License: MIT + file LICENSE
 Imports: 
-    htmlwidgets (>= 0.3),
-    rgexf,
     igraph,
     dplyr,
     magrittr
