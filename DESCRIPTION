@@ -10,5 +10,6 @@ License: MIT + file LICENSE
 Imports: 
     igraph,
     dplyr,
-    magrittr
+    magrittr,
+    jsonlite
 Suggests: testthat
