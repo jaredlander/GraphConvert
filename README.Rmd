@@ -16,8 +16,16 @@ knitr::opts_chunk$set(
 
 [![Travis-CI Build Status](https://travis-ci.org/jaredlander/GraphConvert.svg?branch=master)](https://travis-ci.org/jaredlander/GraphConvert)
 
-### GraphConvert
+# GraphConvert
 
 This is a collection of utilities for converting graphs amongst different types.
 
-Examples will be added as functionality is built.
+## Converting Data to json
+
+```{r flight-data}
+library(GraphConvert)
+g <- igraph::graph('bull')
+thisJson <- igraphToJson(g)
+jsonlite::prettify(thisJson)
+```
+
