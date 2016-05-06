@@ -11,9 +11,9 @@ test_that('prepIgraphConversion returns two data.frames of the proper sizes', {
     expect_is(prepped$nodes, 'data.frame')
     expect_is(prepped$edges, 'data.frame')
     
-    expect_equal(nrow(prepped$nodes), vcount(flightGraph))
-    expect_equal(nrow(prepped$edges), ecount(flightGraph))
+    expect_equal(nrow(prepped$nodes), igraph::vcount(flightGraph))
+    expect_equal(nrow(prepped$edges), igraph::ecount(flightGraph))
     
-    expect_equal(ncol(prepped$nodes), length(vertex.attributes(flightGraph)) + 1)
-    expect_equal(ncol(prepped$edges), length(edge.attributes(flightGraph)) + 3)
+    expect_equal(ncol(prepped$nodes), length(igraph::vertex.attributes(flightGraph)) + 1)
+    expect_equal(ncol(prepped$edges), length(igraph::edge.attributes(flightGraph)) + 3)
 })

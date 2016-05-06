@@ -1,4 +1,4 @@
 library(testthat)
-library(sigma)
+library(GraphConvert)
 
-test_check("sigma")
+test_check("GraphConvert")
