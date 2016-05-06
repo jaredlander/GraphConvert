@@ -4,10 +4,12 @@
 \alias{igraphToJson}
 \title{igraphToJson}
 \usage{
-igraphToJson(g)
+igraphToJson(g, mode = c("NORMAL", "EXTENDED", "EMBEDDED", "COMPACT"))
 }
 \arguments{
 \item{g}{An igraph object}
+
+\item{mode}{graphson mode}
 }
 \value{
 A string of json text representing the igraph object as an array holding an array each for nodes and edges.

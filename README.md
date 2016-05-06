@@ -15,7 +15,10 @@ g <- igraph::graph('bull')
 thisJson <- igraphToJson(g)
 jsonlite::prettify(thisJson)
 #> {
-#>     "nodes": [
+#>     "mode": [
+#>         "NORMAL"
+#>     ],
+#>     "vertices": [
 #>         {
 #>             "label": "1",
 #>             "id": 1

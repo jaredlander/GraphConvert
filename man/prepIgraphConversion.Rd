@@ -4,10 +4,12 @@
 \alias{prepIgraphConversion}
 \title{prepIgraphConversion}
 \usage{
-prepIgraphConversion(g)
+prepIgraphConversion(g, nodesName = c("vertices", "nodes"))
 }
 \arguments{
 \item{g}{An igraph object}
+
+\item{nodesName}{Name for node portion of the object}
 }
 \value{
 A list holding a nodes data.frames and an edges data.frame.  The nodes data.frame has at minimum an id and label column plus any other node attributes.  The edges data.frame has at minimum an id, source and target columns plus any edge attributes.

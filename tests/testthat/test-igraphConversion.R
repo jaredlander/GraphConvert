@@ -1,6 +1,6 @@
 context("igraphConversion works")
 data(flightGraph)
-prepped <- prepIgraphConversion(flightGraph)
+prepped <- prepIgraphConversion(flightGraph, nodesName='nodes')
 
 test_that('prepIgraphConversion returns a two element list', {
     expect_is(prepped, 'list')

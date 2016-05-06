@@ -7,13 +7,17 @@
 #' @importFrom magrittr "%<>%" "%>%"
 #' @importFrom dplyr mutate n rename select mutate_ rename_
 #' @param g An igraph object
+#' @param nodesName Name for node portion of the object
 #' @return A list holding a nodes data.frames and an edges data.frame.  The nodes data.frame has at minimum an id and label column plus any other node attributes.  The edges data.frame has at minimum an id, source and target columns plus any edge attributes.
 #' @examples 
 #' 
 #' data(flightGraph)
 #' prepIgraphConversion(flightGraph)
-prepIgraphConversion <- function(g)
+prepIgraphConversion <- function(g, nodesName=c('vertices', 'nodes'))
 {
+    
+    nodesName <- match.arg(nodesName)
+    
     # first make sure the nodes have names
     if(is.null(igraph::V(g)$name))
     {
@@ -23,23 +27,24 @@ prepIgraphConversion <- function(g)
     # make graph into a list of data.frames
     gdata <- igraph::get.data.frame(g, what = "both")
     
-    # rename vertices to nodes
-    names(gdata)[1] <- 'nodes'
-    
     # add a column to nodes to hold the IDs
     #gdata$nodes %<>% mutate(id=as.integer(as.factor(name))) %>% rename(label=name)
-    gdata$nodes <- gdata$nodes %>% mutate_(id=~as.integer(as.factor(name))) %>% rename_(label=~name)
+    gdata$vertices <- gdata$vertices %>% mutate_(id=~as.integer(as.factor(name))) %>% rename_(label=~name)
     # extract node info for color, position, size, shape and color
     
     ## replace from and to in edges with their IDs
     # first create a named vector of ids
-    nodesID <- gdata$nodes$id
-    names(nodesID) <- gdata$nodes$label
+    nodesID <- gdata$vertices$id
+    names(nodesID) <- gdata$vertices$label
     # now in the edges create the id columns and an edge id
     #gdata$edges %<>% mutate(id=sprintf('e%s', 1:n()), source=nodesID[from], target=nodesID[to]) %>%
     gdata$edges %<>% mutate(id=1:n()) %>% mutate_(source=~nodesID[from], target=~nodesID[to]) %>%
         # and drop the old one
         dplyr::select_(~-from, ~-to)
+    
+    # rename vertices to nodes if needed
+    # rename vertices to nodes
+    names(gdata)[1] <- nodesName
     
     return(gdata)
 }
@@ -52,16 +57,22 @@ prepIgraphConversion <- function(g)
 #' @aliases igraphToJson
 #' @export igraphToJson
 #' @param g An igraph object
+#' @param mode graphson mode
 #' @return A string of json text representing the igraph object as an array holding an array each for nodes and edges.
 #' @examples 
 #' data(flightGraph)
 #' igraphToJson(flightGraph)
 #' 
-igraphToJson <- function(g)
+igraphToJson <- function(g, mode=c('NORMAL', 'EXTENDED', 'EMBEDDED', 'COMPACT'))
 {
-    # convert graph into a list of data.frames
-    gdata <- prepIgraphConversion(g)
+    mode <- match.arg(mode)
     
+    # convert graph into a list of data.frames
+    gdata <- prepIgraphConversion(g, nodesName='vertices')
+    
+    # build list that adds in mode as the first element
+    gdata <- list(mode=mode, vertices=gdata[['vertices']], edges=gdata[['edges']])
+
     return(jsonlite::toJSON(gdata))
 }
 
