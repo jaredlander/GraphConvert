@@ -5,11 +5,13 @@ Version: 1.0
 Date: 2015-08-12
 Author: Jared P. Lander
 Maintainer: Jared P. Lander <packages@jaredlander.com>
-Description: Utilities for converting graphs amongst different types
+Description: Utilities for converting graphs amongst different serialized representations.
 License: MIT + file LICENSE
-Imports: 
+Imports:
     igraph,
     dplyr,
     magrittr,
     jsonlite
-Suggests: testthat
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
